@@ -679,14 +679,15 @@ module.exports = {
                                 (button) => button.customId === i.customId
                             );
 
-                            if (i.user.id !== interaction.user.id) {
-                                await i.reply({
-                                    content: '타인의 버튼은 사용할 수 없습니다.',
-                                    ephemeral: true
-                                });
-                            } else {
-                                await button.action(i);
-                            }
+                            // if (i.user.id !== interaction.user.id) {
+                            //     await i.reply({
+                            //         content: '타인의 버튼은 사용할 수 없습니다.',
+                            //         ephemeral: true
+                            //     });
+                            // } else {
+                            //     await button.action(i);
+                            // }
+                            await button.action(i);
                         });
                     }
                 }
