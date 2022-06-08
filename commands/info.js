@@ -19,14 +19,14 @@ module.exports = {
     async execute(interaction) {
 
         username = String(interaction.options.getString('닉네임'))
+        ephbool =false;
+        // ephbool = interaction.options.getBoolean('타인표시')
 
-        ephbool = interaction.options.getBoolean('타인표시')
-
-        if (ephbool === true) {
-            ephbool = false;
-        } else {
-            ephbool = true;
-        }
+        // if (ephbool === true) {
+        //     ephbool = false;
+        // } else {
+        //     ephbool = true;
+        // }
 
         await interaction.deferReply({ ephemeral: ephbool });
 
