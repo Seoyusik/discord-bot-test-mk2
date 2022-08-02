@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         await interaction.deferReply();
 
-        axios.get('http://152.70.248.4:5000/adventureisland/')
+        axios.get('https://lostarkapi.ga/adventureisland/')
             .then(response => {
                 if (response.data.Result == "Failed") {
                     const error_notify = new MessageEmbed()

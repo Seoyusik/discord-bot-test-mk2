@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         await interaction.deferReply();
 
-        axios.get('http://152.70.248.4:5000/crystal/')
+        axios.get('https://lostarkapi.ga/crystal/')
             .then(response => {
                 if (response.data.Result == "Failed") {
                     const error_notify = new MessageEmbed()

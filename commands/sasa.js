@@ -16,7 +16,7 @@ module.exports = {
 
         nickname = String(interaction.options.getString('닉네임'))
 
-        axios.get(encodeURI('http://152.70.248.4:5000/sasa/' + nickname))
+        axios.get(encodeURI('https://lostarkapi.ga/sasa/' + nickname))
             .then(response => {
                 if (response.data.Result == "Failed") {
                     const error_notify = new MessageEmbed()

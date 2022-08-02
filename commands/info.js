@@ -30,7 +30,7 @@ module.exports = {
 
         await interaction.deferReply({ ephemeral: ephbool });
 
-        axios.get(encodeURI('http://152.70.248.4:5000/userinfo/' + username))
+        axios.get(encodeURI('https://lostarkapi.ga/userinfo/' + username))
             .then(response => {
                 if (response.data.Result == "Failed") {
                     const error_notify = new MessageEmbed()
@@ -198,6 +198,25 @@ module.exports = {
                             )
                             .setFooter({ text: 'Made By 모코코더#3931', iconURL: 'https://cdn.discordapp.com/avatars/693421981705568346/f7cf118ca37e88b490ad1ac1489416ea.webp' })
 
+                        let tripodStr=''
+                        const tripodDetailObj = response.data.Detailed_Tri || {}
+                        Object.keys(tripodDetailObj).map(_skillName => {
+                            const tripodList = tripodDetailObj[_skillName]
+                            const tripodDetail = tripodList.map(elem=>{
+                                const level = elem['lvl']
+                                const tripodName = elem['name']
+                                return `${tripodName} Lv.${level}`
+                            })
+                            tripodStr=tripodStr+`[${_skillName}]: ${tripodDetail.join(' | ')}\n`
+                        })
+                        const tripod_result = new MessageEmbed()
+                        .setColor('DARK_BLUE')
+                        .setTitle('트라이포드')
+                        .addFields(
+                            { name: "▫️ 레벨2 이상 트라이포드만 표시", value: tripodStr, inline: false },
+                        )
+                        .setFooter({ text: 'Made By 모코코더#3931', iconURL: 'https://cdn.discordapp.com/avatars/693421981705568346/f7cf118ca37e88b490ad1ac1489416ea.webp' })
+                      
                         const ItemList = ["무기", "머리 방어구", "상의"];
                         const ItemList2 = ["하의", "장갑", "어깨 방어구"];
 
@@ -207,13 +226,6 @@ module.exports = {
                         for (const i in ItemList) {
                             try {
                                 eqname = response.data.Items[ItemList[i]].Name
-                                tri = ""
-
-                                if (response.data.Items[ItemList[i]].Tri !== "트라이포드 효과 적용 불가") {
-                                    for (const j in response.data.Items[ItemList[i]].Tri) {
-                                        tri = tri + "[`" + response.data.Items[ItemList[i]].Tri[j].SkillName + "`] " + response.data.Items[ItemList[i]].Tri[j].Effect + "\n"
-                                    }
-                                }
                                 qualemoji = "⬜"
                                 qual = parseInt(response.data.Items[ItemList[i]].Quality)
 
@@ -224,7 +236,7 @@ module.exports = {
                                 if (90 <= qual && qual < 100) { qualemoji = "🟪" }
                                 if (qual === 100) { qualemoji = "🟧" }
 
-                                gearlist = gearlist + ("**" + qualemoji + " " + eqname + "** \n [`품질`] : " + response.data.Items[ItemList[i]].Quality + "\n" + tri) + "\n"
+                                gearlist = gearlist + ("**" + qualemoji + " " + eqname + "** \n [`품질`] : " + response.data.Items[ItemList[i]].Quality + "\n") + "\n"
                             } catch (error) {
                             }
                         }
@@ -232,13 +244,7 @@ module.exports = {
                         for (const i in ItemList2) {
                             try {
                                 eqname = response.data.Items[ItemList2[i]].Name
-                                tri = ""
-
-                                if (response.data.Items[ItemList2[i]].Tri !== "트라이포드 효과 적용 불가") {
-                                    for (const j in response.data.Items[ItemList2[i]].Tri) {
-                                        tri = tri + "[`" + response.data.Items[ItemList2[i]].Tri[j].SkillName + "`] " + response.data.Items[ItemList2[i]].Tri[j].Effect + "\n"
-                                    }
-                                }
+                            
                                 qualemoji = "⬜"
                                 qual = parseInt(response.data.Items[ItemList2[i]].Quality)
 
@@ -249,7 +255,7 @@ module.exports = {
                                 if (90 <= qual && qual < 100) { qualemoji = "🟪" }
                                 if (qual === 100) { qualemoji = "🟧" }
 
-                                gearlist2 = gearlist2 + ("**" + qualemoji + " " + eqname + "** \n [`품질`] : " + response.data.Items[ItemList2[i]].Quality + "\n" + tri) + "\n"
+                                gearlist2 = gearlist2 + ("**" + qualemoji + " " + eqname + "** \n [`품질`] : " + response.data.Items[ItemList2[i]].Quality + "\n" ) + "\n"
                             } catch (error) {
                             }
                         }
@@ -576,6 +582,14 @@ module.exports = {
                                 style: "SECONDARY",
                                 async action(interaction) {
                                     await interaction.update({ embeds: [jewl_card_result] });
+                                },
+                            },
+                            {
+                                customId: "tripod_result",
+                                label: "보석&카드",
+                                style: "SECONDARY",
+                                async action(interaction) {
+                                    await interaction.update({ embeds: [tripod_result] });
                                 },
                             },
                             {

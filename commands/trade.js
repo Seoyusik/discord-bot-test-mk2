@@ -16,7 +16,7 @@ module.exports = {
 
         itemnm = String(interaction.options.getString('아이템'))
 
-        axios.get(encodeURI('http://152.70.248.4:5000/tradeplus/' + itemnm))
+        axios.get(encodeURI('https://lostarkapi.ga/tradeplus/' + itemnm))
             .then(response => {
                 if (response.data.Result == "Failed") {
                     const error_notify = new MessageEmbed()
@@ -64,7 +64,7 @@ module.exports = {
                                         await interaction.deferUpdate();
 
                                         if (results[this.value] === undefined) {
-                                            axios.get(encodeURI('http://152.70.248.4:5000/tradeplus/' + this.value))
+                                            axios.get(encodeURI('https://lostarkapi.ga/tradeplus/' + this.value))
                                                 .then(search_response => {
                                                     if (search_response.data.Result == "Failed") {
                                                         const error_notify = new MessageEmbed()
@@ -81,7 +81,7 @@ module.exports = {
                                                             percount = "1"
                                                         }
 
-                                                        axios.get("http://152.70.248.4:5000/trade/" + String(number))
+                                                        axios.get("https://lostarkapi.ga/trade/" + String(number))
                                                             .then(search_response2 => {
                                                                 count = ""
                                                                 price = ""
@@ -163,7 +163,7 @@ module.exports = {
                             percount = "1"
                         }
 
-                        axios.get("http://152.70.248.4:5000/trade/" + String(number))
+                        axios.get("https://lostarkapi.ga/trade/" + String(number))
                             .then(response2 => {
                                 count = ""
                                 price = ""
