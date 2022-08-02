@@ -583,15 +583,7 @@ module.exports = {
                                 async action(interaction) {
                                     await interaction.update({ embeds: [jewl_card_result] });
                                 },
-                            },
-                            {
-                                customId: "tripod_result",
-                                label: "보석&카드",
-                                style: "SECONDARY",
-                                async action(interaction) {
-                                    await interaction.update({ embeds: [tripod_result] });
-                                },
-                            },
+                            },       
                             {
                                 customId: "gearlist_result",
                                 label: "장비",
@@ -620,13 +612,21 @@ module.exports = {
                                 },
                             },
                             {
-                                customId: "sasa_result",
-                                label: "사사게",
+                                customId: "tripod_result",
+                                label: "트라이포드",
                                 style: "SECONDARY",
                                 async action(interaction) {
-                                    await interaction.update({ embeds: [sasa_result] });
+                                    await interaction.update({ embeds: [tripod_result] });
                                 },
                             },
+                            // {
+                            //     customId: "sasa_result",
+                            //     label: "사사게",
+                            //     style: "SECONDARY",
+                            //     async action(interaction) {
+                            //         await interaction.update({ embeds: [sasa_result] });
+                            //     },
+                            // },
                             {
                                 customId: "charlist_result",
                                 label: "캐릭터 목록",
